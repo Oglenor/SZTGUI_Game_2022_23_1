@@ -13,16 +13,21 @@ namespace Logic.Enums
 
     public enum Rarities
     {
-        Stone = 1, Bronze = 2, Golden = 3
+        Stone = 1, Bronze = 2, Golden = 4
     }
 
     public enum Categories
     {
-        Alchemy, Necromancy, Divine
+        Divine = 1, Necromancy = 2, Alchemy = 4
     }
 
     public enum Resolution
     {
         PlayerWin, Tie, PlayerLoss
+    }
+
+    public enum CheckWinner
+    {
+        PlayerWin, Undecided, PlayerLoss
     }
 }
