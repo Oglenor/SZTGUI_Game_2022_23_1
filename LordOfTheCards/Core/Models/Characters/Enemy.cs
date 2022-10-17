@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Core.Models.Characters
 {
-    internal class Enemy : PlayerEntity
+    public class Enemy : PlayerEntity
     {
         public override Card Deploy()
         {

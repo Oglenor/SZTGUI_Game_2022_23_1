@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace Core.Models
 {
-    internal class GameModel : IGameModel
+    public class GameModel : IGameModel
     {
-        public Dictionary<string, Map> Maps { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public Player Player { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public List<Enemy> EnemyList { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public List<Card> AllCards { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public Dictionary<string, Map> Maps { get; set; }
+        public Player Player { get; set; }
+        public List<Enemy> EnemyList { get; set; }
+        public List<Card> AllCards { get; set; }
     }
 }

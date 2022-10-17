@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Core.Models.GameElements
 {
-    internal class Card
+    public class Card
     {
         private int id;
         private Token token;

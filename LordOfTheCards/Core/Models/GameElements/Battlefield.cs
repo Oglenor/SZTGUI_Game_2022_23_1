@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Core.Models.GameElements
 {
-    internal class Battlefield
+    public class Battlefield
     {
         private List<Token> playerTokens;
         private List<Token> enemyTokens;

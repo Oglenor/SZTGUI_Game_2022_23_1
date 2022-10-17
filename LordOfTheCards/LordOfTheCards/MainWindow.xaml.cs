@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LordOfTheCards.Logic.Implementations;
+using LordOfTheCards.Logic.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +22,17 @@ namespace LordOfTheCards
     /// </summary>
     public partial class MainWindow : Window
     {
+        IGameDisplayService gameDisplayService;
+
         public MainWindow()
         {
+            gameDisplayService = new GameDisplayService();
             InitializeComponent();
+        }
+
+        private void NewGameClick(object sender, RoutedEventArgs e)
+        {
+            gameDisplayService.Display();
         }
     }
 }
