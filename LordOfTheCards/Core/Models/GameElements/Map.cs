@@ -6,7 +6,26 @@ using System.Threading.Tasks;
 
 namespace Core.Models.GameElements
 {
-    internal class Map
+    public class Map
     {
-	}
+        public string Name { get; set; }
+        public int RowCapacity { get; set; }
+        public int ColumnCapacity { get; set; }
+        public IEnumerable<Tile> Tiles { get; set; }
+
+        public Map(string name, int rowCapacity, int columnCapacity)
+        {
+            Name = name;
+            RowCapacity = rowCapacity;
+            ColumnCapacity = columnCapacity;
+        }
+
+        public Map(string name, int rowCapacity, int columnCapacity, IEnumerable<Tile> tiles)
+        {
+            Name = name;
+            RowCapacity = rowCapacity;
+            ColumnCapacity = columnCapacity;
+            Tiles = tiles;
+        }
+    }
 }
