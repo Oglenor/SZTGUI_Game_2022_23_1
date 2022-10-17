@@ -1,5 +1,5 @@
 ﻿using Core.Models.Characters;
-using Logic.Enums;
+using Models.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -94,6 +94,7 @@ namespace Core.Models.GameElements
             List<Colors> colorsNecromancy = new List<Colors>();
             List<Colors> colorsAlchemy = new List<Colors>();
 
+            //player check
             foreach (var token in playerTokens)
             {
                 switch (token.Category)
@@ -114,20 +115,58 @@ namespace Core.Models.GameElements
                         break;
                 }
             }
-
             if (colorsDivine.Count >= 3 || colorsNecromancy.Count >= 3 || colorsAlchemy.Count >= 3)
             {
                 return CheckWinner.PlayerWin;
             }
 
+            //enemy check
 
+            foreach (var token in enemyTokens)
+            {
+                switch (token.Category)
+                {
+                    case Categories.Divine:
+                        if (!colorsDivine.Contains(token.Color))
+                            colorsDivine.Add(token.Color);
+                        break;
+                    case Categories.Necromancy:
+                        if (!colorsNecromancy.Contains(token.Color))
+                            colorsNecromancy.Add(token.Color);
+                        break;
+                    case Categories.Alchemy:
+                        if (!colorsAlchemy.Contains(token.Color))
+                            colorsAlchemy.Add(token.Color);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            if (colorsDivine.Count >= 3 || colorsNecromancy.Count >= 3 || colorsAlchemy.Count >= 3)
+            {
+                return CheckWinner.PlayerLoss;
+            }
 
-            throw new NotImplementedException();
+            return CheckForThreeOfDifferentKinds();
         }
         private CheckWinner CheckForThreeOfDifferentKinds()
         {
+
             throw new NotImplementedException();
         }
+
+        /*boolean findSolutions(n, other params) :
+            if (found a solution) :
+                displaySolution();
+                return true;
+
+            for (val = first to last) :
+                if (isValid(val, n)) :
+                applyValue(val, n);
+                    if (findSolutions(n+1, other params))
+                        return true;
+                removeValue(val, n);
+            return false;*/
 
         private Resolution ResolutionCheck(Card CurrentPlayerCard, Card CurrentEnemyCard)
         {

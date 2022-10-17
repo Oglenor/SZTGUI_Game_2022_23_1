@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Logic.Enums
+namespace Models.Enums
 {
     public enum Colors
     {
