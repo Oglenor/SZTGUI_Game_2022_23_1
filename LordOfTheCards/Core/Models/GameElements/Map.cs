@@ -18,6 +18,7 @@ namespace Core.Models.GameElements
             Name = name;
             RowCapacity = rowCapacity;
             ColumnCapacity = columnCapacity;
+            Tiles = new List<Tile>();
         }
 
         public Map(string name, int rowCapacity, int columnCapacity, IEnumerable<Tile> tiles)
