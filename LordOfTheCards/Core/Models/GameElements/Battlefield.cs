@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.Models.GameElements
 {
-    internal class Battlefield
+    public class Battlefield
     {
         //current deployed cards
         //token lists

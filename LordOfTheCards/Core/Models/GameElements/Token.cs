@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.Models.GameElements
 {
-    internal class Token
+    public class Token
     {
     }
 }

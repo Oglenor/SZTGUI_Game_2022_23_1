@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Models.GameElements
+namespace LordOfTheCards.Logic.Interfaces
 {
-    public class Card
+    public interface IGameDisplayService
     {
+        void Display();
     }
 }

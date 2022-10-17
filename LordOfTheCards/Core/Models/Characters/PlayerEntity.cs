@@ -7,7 +7,7 @@ using System.Windows.Media.Animation;
 
 namespace Core.Models.Characters
 {
-    abstract internal class PlayerEntity
+    abstract public class PlayerEntity
     {
         //deck -> hand
 

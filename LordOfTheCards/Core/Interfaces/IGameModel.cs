@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Core.Interfaces
 {
-    internal interface IGameModel
+    public interface IGameModel
     {
         Dictionary<string, Map> Maps { get; set;}
         Player Player { get; set; }

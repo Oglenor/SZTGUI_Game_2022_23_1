@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Core.Models
 {
-    internal class GameModel : IGameModel
+    public class GameModel : IGameModel
     {
         public Dictionary<string, Map> Maps { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public Player Player { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }

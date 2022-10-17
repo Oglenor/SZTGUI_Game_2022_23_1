@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.Models.Characters
 {
-    internal class Player : PlayerEntity
+    public class Player : PlayerEntity
     {
     }
 }
