@@ -90,6 +90,38 @@ namespace Core.Models.GameElements
         }
         private CheckWinner CheckForThreeOfAKind()
         {
+            List<Colors> colorsDivine = new List<Colors>();
+            List<Colors> colorsNecromancy = new List<Colors>();
+            List<Colors> colorsAlchemy = new List<Colors>();
+
+            foreach (var token in playerTokens)
+            {
+                switch (token.Category)
+                {
+                    case Categories.Divine:
+                        if(!colorsDivine.Contains(token.Color))
+                            colorsDivine.Add(token.Color);
+                        break;
+                    case Categories.Necromancy:
+                        if (!colorsNecromancy.Contains(token.Color))
+                            colorsNecromancy.Add(token.Color);
+                        break;
+                    case Categories.Alchemy:
+                        if (!colorsAlchemy.Contains(token.Color))
+                            colorsAlchemy.Add(token.Color);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            if (colorsDivine.Count >= 3 || colorsNecromancy.Count >= 3 || colorsAlchemy.Count >= 3)
+            {
+                return CheckWinner.PlayerWin;
+            }
+
+
+
             throw new NotImplementedException();
         }
         private CheckWinner CheckForThreeOfDifferentKinds()
