@@ -1,4 +1,5 @@
 ﻿using Core.Models.GameElements;
+using Core.Models.GameElements.Cards;
 using System;
 using System.CodeDom;
 using System.Collections.Generic;
@@ -31,6 +32,10 @@ namespace Core.Models.Characters
             set { hand = value; }
         }
 
+        public List<Token> Tokens { get; set; }
+
+        //Saját típus a példa kedvéért, a példában ez most a deck.
+        public List<IstvanCard> istvanCards { get; set; }
 
         public void ShuffleDeck()
         {
@@ -58,6 +63,8 @@ namespace Core.Models.Characters
         {
             Hand.Add(Deck[0]);
         }
+
+
 
         abstract public Card Deploy();
     }

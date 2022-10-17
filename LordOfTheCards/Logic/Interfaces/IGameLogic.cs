@@ -1,4 +1,6 @@
-﻿using Logic.Enums;
+﻿using Core.Interfaces;
+using Core.Models.Characters;
+using Logic.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace Logic.Interfaces
 {
-    internal interface IGameLogic
+    public interface IGameLogic
     {
-        public void Move(Directions direction);
-        public event EventHandler FigthStart;
-
-        
+        IGameModel GameModel { get; set; }
+        void Move(Directions direction);
+        event EventHandler FigthStart;
+        void Fight(PlayerEntity entity);
     }
 }

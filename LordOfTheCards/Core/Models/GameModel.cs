@@ -1,6 +1,7 @@
 ﻿using Core.Interfaces;
 using Core.Models.Characters;
 using Core.Models.GameElements;
+using Models.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,6 @@ namespace Core.Models
         public Dictionary<string, Map> Maps { get; set; }
         public Player Player { get; set; }
         public List<Enemy> EnemyList { get; set; }
-        public List<Card> AllCards { get; set; }
+        public List<Card> AllCards { get; set; }             
     }
 }
