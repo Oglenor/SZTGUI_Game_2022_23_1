@@ -38,13 +38,13 @@ namespace LordOfTheCards.Controls
 
         private void LordOfTheCardsControl_Loaded(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("+++");
+            //MessageBox.Show("+++");
             var window = Window.GetWindow(this);
 
             if (window != null)
             {
 
-                MessageBox.Show("+++");
+                //MessageBox.Show("+++");
                 IGameModel gameModel = new GameModel();
 
                 gameModel.Maps = new Dictionary<string, Core.Models.GameElements.Map>();
@@ -55,7 +55,7 @@ namespace LordOfTheCards.Controls
 
                 for (int i = 0; i < m.RowCapacity * m.ColumnCapacity; i++)
                 {
-                    m.Tiles.ToList().Add(new Tile(i * 50, i * 50, i % 2 == 0));
+                    m.Tiles.ToList().Add(new Tile(i + 50, i + 50, i % 2 == 0));
                 }
 
                 gameModel.Maps.Add("defaultmap", m);
@@ -71,7 +71,7 @@ namespace LordOfTheCards.Controls
             if (gameRenderer != null)
             {
                 string msg = gameRenderer.GameModel.Maps.GetValueOrDefault("defaultmap").Name;
-                MessageBox.Show(msg);
+                //MessageBox.Show(msg);
 
                 drawingContext.DrawDrawing(gameRenderer.GetDrawing());
             }
