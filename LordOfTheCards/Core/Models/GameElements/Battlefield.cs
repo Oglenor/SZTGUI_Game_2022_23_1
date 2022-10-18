@@ -15,6 +15,8 @@ namespace Core.Models.GameElements
         private Card currentPlayerCard;
         private Card currentEnemyCard;
         private Resolution currentTurnResolution;
+        private Player currentPlayer;
+        private Enemy currentEnemy;
 
         public List<Token> PlayerTokens
         {
@@ -41,22 +43,34 @@ namespace Core.Models.GameElements
             get { return currentTurnResolution; }
             set { currentTurnResolution = value; }
         }
+        public Player CurrentPlayer
+        {
+            get { return currentPlayer; }
+            set { currentPlayer = value; }
+        }
+        public Enemy CurrentEnemy
+        {
+            get { return currentEnemy; }
+            set { currentEnemy = value; }
+        }
 
-        public Battlefield()
+        public Battlefield(Player currentPlayer, Enemy currentEnemy)
         {
             PlayerTokens = new List<Token>();
             EnemyTokens = new List<Token>();
             CurrentPlayerCard = null;
             CurrentEnemyCard = null;
             CurrentTurnResolution = new Resolution();
+            CurrentPlayer = currentPlayer;
+            CurrentEnemy = currentEnemy;
         }
 
-        public void Step1_Upkeep(Player player, Enemy enemy)
+        public void Step1_Upkeep()
         {
-            player.Upkeep();
-            enemy.Upkeep();
+            currentPlayer.Upkeep();
+            currentEnemy.Upkeep();
 
-            Step2_Deploy(player, enemy);
+            Step2_Deploy(currentPlayer, currentEnemy);
         }
 
         private void Step2_Deploy(Player player, Enemy enemy)

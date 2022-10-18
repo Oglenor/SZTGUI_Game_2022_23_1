@@ -45,5 +45,10 @@ namespace Core.Models.GameElements
             this.rarity = (Rarities)Enum.Parse(typeof(Rarities), rarity);
             this.category = (Categories)Enum.Parse(typeof(Categories), color);
         }
+
+        public void Action(Battlefield battlefield)
+        {
+            //to be implemented
+        }
     }
 }

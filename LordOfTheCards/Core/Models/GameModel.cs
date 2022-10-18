@@ -15,5 +15,6 @@ namespace Core.Models
         public Player Player { get; set; }
         public List<Enemy> EnemyList { get; set; }
         public List<Card> AllCards { get; set; }
+        public Battlefield Battlefield { get; set; }
     }
 }

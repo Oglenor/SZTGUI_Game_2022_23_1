@@ -14,6 +14,7 @@ namespace Core.Interfaces
         Player Player { get; set; }
         List<Enemy> EnemyList { get; set; }
         List<Card> AllCards { get; set; }
+        Battlefield Battlefield { get; set; }
 
 	}
 }
