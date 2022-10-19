@@ -40,15 +40,26 @@ namespace Core.Models.GameElements
         public Card(int id, string color, string rarity, string category)
         {
             this.id = id;
-            this.token = new Token((Colors)Enum.Parse(typeof(Colors), color), (Rarities)Enum.Parse(typeof(Rarities), rarity), (Categories)Enum.Parse(typeof(Categories), color));
             this.color = (Colors)Enum.Parse(typeof(Colors), color);
             this.rarity = (Rarities)Enum.Parse(typeof(Rarities), rarity);
             this.category = (Categories)Enum.Parse(typeof(Categories), color);
+            token = new Token(Color, Category);
         }
 
         public void Action(Battlefield battlefield)
         {
-            //to be implemented
+            switch (ID)
+            {
+                case 0: //comet of hope for example
+                    Resolution currentTurn = battlefield.CurrentTurnResolution;
+                    if (currentTurn == Resolution.PlayerLoss)
+                        battlefield.PlayerTokens.Add(new Token(Colors.Blue, Categories.Alchemy));
+                    else if (currentTurn == Resolution.PlayerWin)
+                        battlefield.PlayerTokens.Add(new Token(Colors.Blue, Categories.Divine));
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

@@ -49,6 +49,7 @@ namespace Logic
         private void Step3_Resolution()
         {
             gameModel.Battlefield.CurrentTurnResolution = ResolutionCheck(gameModel.Battlefield.CurrentPlayerCard, gameModel.Battlefield.CurrentEnemyCard);
+            gameModel.Battlefield.AwardToken();
             Step4_Actions();
         }
 
