@@ -23,12 +23,14 @@ namespace Core.Models
         public GameModel()
         {
             AllCards = new List<Card>();
-            StreamReader cardFile = new StreamReader(Path.Combine("Core", "Assets", "AllCardsData.txt"));
+            StreamReader cardFile = new StreamReader(Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "Core", "Assets", "AllCards", Path.GetFileName("AllCardsData.txt")));
+            cardFile.ReadLine(); //az első sor a minta
             while (!cardFile.EndOfStream)
             {
-                string[] dataLine = cardFile.ReadLine().Split('/');
+                string[] dataLine = cardFile.ReadLine().Split(',');
                 AllCards.Add(new Card(dataLine));
             }
+            ;
         }
     }
 }
