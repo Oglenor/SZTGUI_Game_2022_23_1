@@ -7,8 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 
 namespace Render.Implementations
 {
@@ -60,7 +62,7 @@ namespace Render.Implementations
 
             List<Tile> itemList = gameModel.Maps.GetValueOrDefault("defaultmap").Tiles.ToList();
 
-           
+           /*
             foreach (var item in itemList)
             {                
                 if (item.IsSolid)
@@ -81,6 +83,23 @@ namespace Render.Implementations
                 }
                 
             }
+           */
+
+            LineGeometry blackLineGeometry = new LineGeometry();
+            blackLineGeometry.StartPoint = new Point(20, 20);
+            blackLineGeometry.EndPoint = new Point(300, 300);
+
+
+
+            // Create a red Brush  
+            SolidColorBrush redBrush = new SolidColorBrush();
+            redBrush.Color = Colors.Red;
+
+            Pen p = new Pen();
+
+            p.Brush = redBrush;
+
+            dg.Children.Add(new GeometryDrawing(null, p, blackLineGeometry));
 
             return dg;
         }
