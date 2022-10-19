@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LordOfTheCards", "LordOfTheCards\LordOfTheCards.csproj", "{7A75E7A3-EA10-47A1-B7D0-F66271E2E934}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LordOfTheCards", "LordOfTheCards\LordOfTheCards.csproj", "{7A75E7A3-EA10-47A1-B7D0-F66271E2E934}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logic", "Logic\Logic.csproj", "{5E78577D-1A98-4FB1-B79C-5790B22414DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Logic", "Logic\Logic.csproj", "{5E78577D-1A98-4FB1-B79C-5790B22414DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Render", "Render\Render.csproj", "{43CD242B-3D6F-41CF-8FDC-2F1E447BB59E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Render", "Render\Render.csproj", "{43CD242B-3D6F-41CF-8FDC-2F1E447BB59E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "Repository\Repository.csproj", "{CA4EF77F-6879-4E12-8D62-9840F84C2108}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository", "Repository\Repository.csproj", "{CA4EF77F-6879-4E12-8D62-9840F84C2108}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{DDCF2F44-BD8E-429A-A039-71404C87DC70}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{DDCF2F44-BD8E-429A-A039-71404C87DC70}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{81DCA4BD-477F-4062-9A7C-CDA53FAF7EE9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test", "Test\Test.csproj", "{81DCA4BD-477F-4062-9A7C-CDA53FAF7EE9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,6 +1,7 @@
 ﻿using Models.Enums;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,7 @@ namespace Core.Models.GameElements
 		private Colors color;
 		private Rarities rarity;
 		private Categories category;
+        private string assetPath;
 
         //event, path
         public int ID
@@ -36,14 +38,21 @@ namespace Core.Models.GameElements
         {
             get { return category; }
         }
-
-        public Card(int id, string color, string rarity, string category)
+        public string AssetPath
         {
-            this.id = id;
-            this.color = (Colors)Enum.Parse(typeof(Colors), color);
-            this.rarity = (Rarities)Enum.Parse(typeof(Rarities), rarity);
-            this.category = (Categories)Enum.Parse(typeof(Categories), color);
+            get { return assetPath; }
+            set { assetPath = value; }
+        }
+
+        public Card(string[] dataLine)
+        {
+            id = int.Parse(dataLine[0]);
+            color = (Colors)Enum.Parse(typeof(Colors), dataLine[1]);
+            rarity = (Rarities)Enum.Parse(typeof(Rarities), dataLine[2]);
+            category = (Categories)Enum.Parse(typeof(Categories), dataLine[3]);
             token = new Token(Color, Category);
+
+            assetPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "Core", "Assets", "AllCards", dataLine[4]));
         }
 
         public void Action(Battlefield battlefield)
