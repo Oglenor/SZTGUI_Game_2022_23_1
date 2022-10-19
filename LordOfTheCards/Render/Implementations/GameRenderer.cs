@@ -60,17 +60,23 @@ namespace Render.Implementations
 
             List<Tile> itemList = gameModel.Maps.GetValueOrDefault("defaultmap").Tiles.ToList();
 
-            int i = 0;
-
+           
             foreach (var item in itemList)
-            {
-                ++i;
-                if (i % 2 == 0)
+            {                
+                if (item.IsSolid)
                 {
                     dg.Children.Add(new GeometryDrawing(
                     GetBrush("wall"),
                     null,
-                    GetRectangleGeometry(item.X * 50, item.Y * 50, 50, 50)
+                    GetRectangleGeometry(item.X, item.Y, 50, 50)
+                    ));
+                }
+                else
+                {
+                    dg.Children.Add(new GeometryDrawing(
+                    GetBrush("floor"),
+                    null,
+                    GetRectangleGeometry(item.X, item.Y, 50, 50)
                     ));
                 }
                 
