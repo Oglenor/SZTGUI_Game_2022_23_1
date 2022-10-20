@@ -32,7 +32,9 @@ namespace LordOfTheCards
 
         private void NewGameClick(object sender, RoutedEventArgs e)
         {
-            gameDisplayService.Display();
+            CardGameWindow cgw = new CardGameWindow();
+            cgw.Show();
+            //gameDisplayService.Display();
         }
     }
 }

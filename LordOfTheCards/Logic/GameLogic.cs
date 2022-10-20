@@ -55,8 +55,8 @@ namespace Logic
 
         private void Step4_Actions()
         {
-            gameModel.Battlefield.CurrentPlayerCard.Action(gameModel.Battlefield);
-            gameModel.Battlefield.CurrentEnemyCard.Action(gameModel.Battlefield);
+            gameModel.Battlefield.CurrentPlayerCard.Action(gameModel.Battlefield, gameModel.Battlefield.CurrentPlayer);
+            gameModel.Battlefield.CurrentEnemyCard.Action(gameModel.Battlefield, gameModel.Battlefield.CurrentEnemy);
             Step5_CheckForWinner();
         }
 

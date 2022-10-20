@@ -30,7 +30,6 @@ namespace Core.Models
                 string[] dataLine = cardFile.ReadLine().Split(',');
                 AllCards.Add(new Card(dataLine));
             }
-            ;
         }
     }
 }
