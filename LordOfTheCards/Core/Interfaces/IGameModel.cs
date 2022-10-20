@@ -10,10 +10,10 @@ namespace Core.Interfaces
 {
     public interface IGameModel
     {
-        Dictionary<string, Map> Maps { get; set;}
-        Player Player { get; set; }
-        List<Enemy> EnemyList { get; set; }
-        List<Card> AllCards { get; set; }
+        public Dictionary<string, Map> Maps { get; set; }
+        public Player Player { get; set; }
+        public List<Enemy> EnemyList { get; set; }
+        public List<Card> AllCards { get; set; }
 
-	}
+    }
 }
