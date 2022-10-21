@@ -3,28 +3,33 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Core.Interfaces;
-using Newtonsoft.Json;
+using Core.Settings;
+//using Newtonsoft.Json;
 
 namespace Repository
 {
     public class GameRepository : IGameRepository
     {
-        public void SaveIntoJson(IGameModel gameModel)
-        {
-            string jsonstring = JsonConvert.SerializeObject(gameModel);
-            File.WriteAllText($"playerName.json", jsonstring);
-        }
+        //public void SaveIntoJson(IGameModel gameModel)
+        //{
+        //    string jsonstring = JsonConvert.SerializeObject(gameModel);
+        //    File.WriteAllText($"playerName.json", jsonstring);
+        //}
 
-        public IGameModel LoadFromJson(string playerName)
-        {
-            return JsonConvert.DeserializeObject<IGameModel>(playerName);
-        }
+        //public IGameModel LoadFromJson(string playerName)
+        //{
+        //    return JsonConvert.DeserializeObject<IGameModel>(playerName);
+        //}
 
         public void StoreGameModel(IGameModel gameModel)
         {
-            throw new NotImplementedException();
+            string content = JsonSerializer.Serialize(gameModel);
+            DateTime now = DateTime.Now;
+            string path = $"{gameModel.GameSettings.SaveDirectory}GameState-{gameModel.GameSettings.HeroName}-{now.Year}-{now.Month}-{now.Day}-{now.Minute}-{now.Second}.json";
+            File.WriteAllText(path, content);
         }
 
         public IGameModel GetModel(string path)
@@ -67,7 +72,8 @@ namespace Repository
 //
 
             private string GenerateSaveFilName()
-            { DateTime now = DateTime.Now; return $"{gameSettings.SaveDirectory}GameState-{gameSettings.HeroName}-{now.Year}-{now.Month}-{now.Day}-{now.Minute}-{now.Second}.json"; }
+            { DateTime now = DateTime.Now; 
+return $"{gameSettings.SaveDirectory}GameState-{gameSettings.HeroName}-{now.Year}-{now.Month}-{now.Day}-{now.Minute}-{now.Second}.json"; }
 
 //
 
