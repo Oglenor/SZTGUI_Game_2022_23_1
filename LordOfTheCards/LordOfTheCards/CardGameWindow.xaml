@@ -1,0 +1,52 @@
+﻿<Window x:Class="LordOfTheCards.CardGameWindow"
+        WindowState="Maximized"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LordOfTheCards"
+        mc:Ignorable="d"
+        Title="CardGameWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+            <ListBox HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Button ></Button>
+            </ListBox>
+            <ListBox HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Button></Button>
+
+            </ListBox>
+            <ListBox HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Button></Button>
+
+            </ListBox>
+        </StackPanel>
+        
+        <Image HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" Source="/AirMonk.jpg" Margin="5"/>
+        <Image HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2" Source="/AirMonk.jpg" Margin="5"/>
+
+
+        <Image HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" Grid.Column="0" Source="/AirMonk.jpg" Margin="2"/>
+        <Image HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" Grid.Column="1" Source="/AirMonk.jpg" Margin="2"/>
+        <Image HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" Grid.Column="2" Source="/AirMonk.jpg" Margin="2"/>
+
+        <Image HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" Grid.Column="5" Source="/AirMonk.jpg" Margin="2"/>
+        <Image HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" Grid.Column="6" Source="/AirMonk.jpg" Margin="2"/>
+        <Image HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" Grid.Column="7" Source="/AirMonk.jpg" Margin="2"/>
+    </Grid>
+</Window>
