@@ -12,11 +12,20 @@ namespace Logic
     public class GameLogic : IGameLogic
     {
         public event EventHandler FigthStart;
-        public IGameModel gameModel;
+        private IGameModel gameModel;
 
-        public IGameModel GameModel { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public IGameModel GameModel
+        {
+            get { return gameModel; }
+            set { gameModel = value; }
+        }
 
         public void Move(Directions direction)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Fight(PlayerEntity entity)
         {
             throw new NotImplementedException();
         }
@@ -241,10 +250,7 @@ namespace Logic
             throw new NotImplementedException();
         }
 
-        public void Fight(PlayerEntity entity)
-        {
-            throw new NotImplementedException();
-        }
+        
 
         #endregion
     }
