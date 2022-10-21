@@ -16,16 +16,12 @@
   </ItemGroup>
 
   <ItemGroup>
-<<<<<<< HEAD
     <None Update="Resources\Images\floor.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Resources\Images\wall.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-=======
-    <Resource Include="AirMonk.jpg" />
->>>>>>> Martin
   </ItemGroup>
 
 </Project>

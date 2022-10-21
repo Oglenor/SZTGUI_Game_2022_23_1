@@ -1,6 +1,5 @@
 ﻿using Core.Models.Characters;
 using Core.Models.GameElements;
-using Core.Models.GameElements.Cards;
 using Models.Enums;
 using System;
 using System.Collections.Generic;
@@ -16,10 +15,6 @@ namespace Core.Interfaces
         Player Player { get; set; }
         List<Enemy> EnemyList { get; set; }
         List<Card> AllCards { get; set; }
-<<<<<<< HEAD
-=======
         Battlefield Battlefield { get; set; }
-
->>>>>>> Martin
 	}
 }

@@ -1,10 +1,7 @@
-<<<<<<< HEAD
-﻿using Core.Interfaces;
+using Core.Interfaces;
 using Core.Models.Characters;
 using Logic.Enums;
-=======
 ﻿using Logic.Enums;
->>>>>>> Martin
 using Logic.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -21,34 +18,15 @@ namespace Logic
 {
     public class GameLogic : IGameLogic
     {
-<<<<<<< HEAD
-        public IGameModel GameModel { get; set; }
-
-        public event EventHandler FigthStart;
-
-        public GameLogic(IGameModel gameModel)
-        {
-            GameModel = gameModel;
-        }
-
-        //Ok a gamemodellt még cizellálni kell.
-        public void Fight(PlayerEntity enemy)
-        {
-            //TODO e player entity-t még meg kellene írni rendesen.
-            
-
-        }
-=======
         public event EventHandler FigthStart;
         public IGameModel gameModel;
->>>>>>> Martin
+
+        public IGameModel GameModel { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public void Move(Directions direction)
         {
             throw new NotImplementedException();
         }
-<<<<<<< HEAD
-=======
 
         #region CardGameLogicRegion
         //all the logic required for the card game
@@ -270,8 +248,11 @@ namespace Logic
             throw new NotImplementedException();
         }
 
-        #endregion
+        public void Fight(PlayerEntity entity)
+        {
+            throw new NotImplementedException();
+        }
 
->>>>>>> Martin
+        #endregion
     }
 }
