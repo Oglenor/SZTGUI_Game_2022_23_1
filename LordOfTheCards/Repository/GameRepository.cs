@@ -6,6 +6,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Core.Interfaces;
+using Core.Models;
 using Core.Settings;
 //using Newtonsoft.Json;
 
@@ -23,15 +24,14 @@ namespace Repository
         //{
         //    return JsonConvert.DeserializeObject<IGameModel>(playerName);
         //}
-
+        DirectoryInfo dInfo;
         public void StoreGameModel(IGameModel gameModel)
         {
             string content = JsonSerializer.Serialize(gameModel);
             DateTime now = DateTime.Now;
-            string path = $"{gameModel.GameSettings.SaveDirectory}GameState-{gameModel.GameSettings.HeroName}-{now.Year}-{now.Month}-{now.Day}-{now.Minute}-{now.Second}.json";
+            string path = $"{GameSettings.SaveDirectory}GameState-{GameSettings.HeroName}-{now.Year}-{now.Month}-{now.Day}-{now.Minute}-{now.Second}.json";
             File.WriteAllText(path, content);
         }
-
         public IGameModel GetModel(string path)
         {
             throw new NotImplementedException();
@@ -39,16 +39,14 @@ namespace Repository
 
         public IGameModel GetLastState()
         {
-            throw new NotImplementedException();
+
         }
 
         public IEnumerable<IGameModel> GetAll()
         {
-            throw new NotImplementedException();
-
-
-
-
+            return dInfo.GetFiles("*.json").Where(x => x.Name.StartsWith("GameState"))
+                      .Select(x => JsonSerializer.Deserialize<GameModel>($"{GameSettings.SaveDirectory}{x.Name}"))
+                      .ToList();
         }
     }
 }
