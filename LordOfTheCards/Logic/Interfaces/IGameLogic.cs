@@ -1,5 +1,6 @@
 ﻿using Core.Interfaces;
 using Core.Models.Characters;
+using Core.Models.GameElements;
 using Logic.Enums;
 using System;
 using System.Collections.Generic;
@@ -15,5 +16,6 @@ namespace Logic.Interfaces
         void Move(Directions direction);
         event EventHandler FigthStart;
         void Fight(PlayerEntity entity);
+        void SetCurrentCard(Card card);
     }
 }

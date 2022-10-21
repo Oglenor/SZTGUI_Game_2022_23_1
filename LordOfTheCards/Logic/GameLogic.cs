@@ -1,18 +1,11 @@
 using Core.Interfaces;
 using Core.Models.Characters;
 using Logic.Enums;
-﻿using Logic.Enums;
 using Logic.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Core.Interfaces;
-using Core.Models;
 using Models.Enums;
 using Core.Models.GameElements;
-using Core.Models.Characters;
 
 namespace Logic
 {
