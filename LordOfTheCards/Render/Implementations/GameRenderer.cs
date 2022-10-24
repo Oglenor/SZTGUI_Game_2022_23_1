@@ -63,11 +63,11 @@ namespace Render.Implementations
         private Drawing DrawGameItems()
         {
             var dg = new DrawingGroup();
-            List<Tile> itemList = gameModel.Maps.GetValueOrDefault(gameSettings.DefaultMapName).Tiles.ToList();           
-            foreach (var item in itemList)
-            {                
-                dg.Children.Add(GetGeometryDrawing(item));                   
-            }
+            GetItemFromMap(GameSettings.DefaultMapName, gameModel.Maps)
+                .Tiles
+                .ToList()
+                .ForEach(x => dg.Children.Add(GetGeometryDrawing(x)));
+
             return dg;
         }
 
@@ -86,7 +86,20 @@ namespace Render.Implementations
 
         private ImageBrush GetBrush(string brusName)
         {
-            return itemBrushes.GetValueOrDefault(brusName).Value;
+            return GetItemFromMap(brusName, itemBrushes).Value;            
+        }
+
+        private V GetItemFromMap<K,V>(K key, IDictionary<K,V> map)
+        {
+            V value;
+            if (map.TryGetValue(key, out value))
+            {
+                return value;
+            }
+            else
+            {
+                throw new KeyNotFoundException($"Key: {key}, was not found!");
+            }
         }
         #endregion
     }
