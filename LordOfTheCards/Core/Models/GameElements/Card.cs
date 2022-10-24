@@ -55,6 +55,10 @@ namespace Core.Models.GameElements
             assetPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "Core", "Assets", "AllCards", dataLine[4]));
         }
 
+        public Card()
+        {
+        }
+
         public void Action(Battlefield battlefield, PlayerEntity entity)
         {
             switch (ID)
