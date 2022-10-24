@@ -44,6 +44,7 @@ namespace Core.Models.GameElements
             set { assetPath = value; }
         }
 
+        //txt beolvasásra volt, lehet most már törölhető
         public Card(string[] dataLine)
         {
             id = int.Parse(dataLine[0]);
@@ -53,6 +54,22 @@ namespace Core.Models.GameElements
             token = new Token(Color, Category);
 
             assetPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "Core", "Assets", "AllCards", dataLine[4]));
+        }
+
+        //szerializálható
+        public Card(int id, Colors color, Rarities rarity, Categories category, string path)
+        {
+            this.id = id;
+            this.color = color;
+            this.rarity = rarity;
+            this.category = category;
+            token = new Token(color, category);
+
+            assetPath = path;
+        }
+
+        public Card()
+        {
         }
 
         public void Action(Battlefield battlefield, PlayerEntity entity)
