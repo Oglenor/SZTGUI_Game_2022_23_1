@@ -17,25 +17,16 @@ namespace Render.Implementations
 {
     public class GameRenderer : IGameRenderer
     {
-
-        private double width;
-        private double height;
         readonly Dictionary<string, Lazy<ImageBrush>> itemBrushes;
-
         private IGameModel gameModel;
-        public IGameModel GameModel { get { return gameModel; } set { gameModel = value; } }
+        private IGameSettings gameSettings;
+        public IGameModel GameModel { get => gameModel; set => gameModel = value; }
+        public IGameSettings GameSettings { get => gameSettings; set => gameSettings = value; }      
 
-        // TODO load from IGameSettings
-        private int tileWidth = 32;
-        private int tileHeight = 32;
-        private const string PATH_BASE = "Resources/Images/";
-        private const string TEST_MAP_NAME = "defaultmap";
-
-        public GameRenderer(double width, double height, IGameModel gameModel)
+        public GameRenderer(IGameModel gameModel, IGameSettings gameSettings)
         {
-            this.width = width;
-            this.height = height;            
             this.gameModel = gameModel;
+            this.gameSettings = gameSettings;
             itemBrushes = new Dictionary<string, Lazy<ImageBrush>>();           
             LoadBrushes();
         }
@@ -53,7 +44,7 @@ namespace Render.Implementations
             var brushNames = Enum.GetNames(typeof(BitMapType));
             foreach (var item in brushNames)
             {
-                itemBrushes.Add(item, new Lazy<ImageBrush>(() => LoadBrush($"{PATH_BASE}{item}.png")));
+                itemBrushes.Add(item, new Lazy<ImageBrush>(() => LoadBrush($"{gameSettings.ResourcesPath}{item}.png")));
             }
         }
 
@@ -61,7 +52,7 @@ namespace Render.Implementations
         {
             var resultBrush = new ImageBrush(new BitmapImage(new Uri(name, UriKind.Relative)));
             resultBrush.TileMode = TileMode.Tile;
-            resultBrush.Viewport = new Rect(0, 0, tileWidth, tileHeight);
+            resultBrush.Viewport = new Rect(0, 0, gameSettings.TileWidth, gameSettings.TileHeight);
             resultBrush.Stretch = Stretch.Uniform;
             resultBrush.ViewportUnits = BrushMappingMode.Absolute;
             return resultBrush;
@@ -72,7 +63,7 @@ namespace Render.Implementations
         private Drawing DrawGameItems()
         {
             var dg = new DrawingGroup();
-            List<Tile> itemList = gameModel.Maps.GetValueOrDefault(TEST_MAP_NAME).Tiles.ToList();           
+            List<Tile> itemList = gameModel.Maps.GetValueOrDefault(gameSettings.DefaultMapName).Tiles.ToList();           
             foreach (var item in itemList)
             {                
                 dg.Children.Add(GetGeometryDrawing(item));                   
@@ -90,7 +81,7 @@ namespace Render.Implementations
 
         private Geometry GetRectangleGeometry(double x, double y)
         {
-            return new RectangleGeometry(new Rect(x, y, tileWidth, tileHeight));
+            return new RectangleGeometry(new Rect(x, y, gameSettings.TileWidth, gameSettings.TileHeight));
         }
 
         private ImageBrush GetBrush(string brusName)

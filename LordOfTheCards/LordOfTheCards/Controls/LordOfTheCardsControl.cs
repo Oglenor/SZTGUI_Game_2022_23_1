@@ -2,6 +2,7 @@
 using Core.Models;
 using Core.Models.Enums;
 using Core.Models.GameElements;
+using Core.Settings;
 using Render.Implementations;
 using Render.Interfaces;
 using System;
@@ -43,15 +44,11 @@ namespace LordOfTheCards.Controls
 
             if (window != null)
             {
-
-                int tileWidth = 32;
-                int tileHeight = 32;
-
+                IGameSettings gameSettings = new GameSettings();
                 IGameModel gameModel = new GameModel();
 
-                gameModel.Maps = new Dictionary<string, Core.Models.GameElements.Map>();
-
-                Map m = new Map("defaultmap", 5, 5);
+                gameModel.Maps = new Dictionary<string, Map>();
+                Map m = new Map(gameSettings.DefaultMapName, 5, 5);
 
                 List<Tile> tiles = new List<Tile>();
 
@@ -61,7 +58,7 @@ namespace LordOfTheCards.Controls
                     y = condition ? ++y : y;
                     x = condition ? 0 : ++x;
 
-                    Tile t = new Tile(x * tileWidth, y * tileHeight, k % 2 == 0);
+                    Tile t = new Tile(x * gameSettings.TileWidth, y * gameSettings.TileHeight, k % 2 == 0);
 
                     if (k % 2 == 0) t.type = BitMapType.floor;
                     else t.type = BitMapType.wall;
@@ -70,10 +67,8 @@ namespace LordOfTheCards.Controls
                 }
 
                 m.Tiles = tiles;
-
-                gameModel.Maps.Add("defaultmap", m);
-
-                gameRenderer = new GameRenderer(800, 800, gameModel);
+                gameModel.Maps.Add(m.Name, m);                
+                gameRenderer = new GameRenderer(gameModel, gameSettings);
 
                 InvalidateVisual();
             }

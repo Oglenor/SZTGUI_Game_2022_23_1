@@ -10,6 +10,7 @@ namespace Render.Interfaces
 {
     public interface IGameRenderer
     {
+        IGameSettings GameSettings { get; set; }
         IGameModel GameModel { get; set; }
         Drawing GetDrawing();
     }
