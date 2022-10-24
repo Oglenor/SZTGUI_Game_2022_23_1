@@ -48,7 +48,8 @@ namespace Logic
 
         private void Step2_Deploy()
         {
-            gameModel.Battlefield.CurrentPlayer.Deploy();
+
+            SetCurrentCard(new Card()); //playerCard, majd a controlból kell kiszedni
             gameModel.Battlefield.CurrentEnemy.Deploy();
             Step3_Resolution();
         }
@@ -250,7 +251,18 @@ namespace Logic
             throw new NotImplementedException();
         }
 
-        
+        public void SetCurrentCard(Card card) //playerCard
+        {
+            GameModel.Battlefield.CurrentPlayerCard = card;
+        }
+
+        public void SetCurrentEnemyCard(Card card) //enemy logic, egyelőre random
+        {
+            //List<Card> enemyDeck = GameModel.Battlefield.CurrentEnemy.Deck;
+            Random rng = new Random();
+
+            GameModel.Battlefield.CurrentEnemyCard = GameModel.Battlefield.CurrentEnemy.Deck[rng.Next(0, 3)];
+        }
 
         public void SetCurrentCard(Card card)
         {
