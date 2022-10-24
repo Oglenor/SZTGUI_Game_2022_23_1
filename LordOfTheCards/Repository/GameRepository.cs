@@ -3,87 +3,45 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Core.Interfaces;
 using Core.Models;
+using Core.Models.GameElements;
 using Core.Settings;
-//using Newtonsoft.Json;
+using Newtonsoft.Json;
+using Repository.Interfaces;
 
 namespace Repository
 {
     public class GameRepository : IGameRepository
     {
-        //public void SaveIntoJson(IGameModel gameModel)
-        //{
-        //    string jsonstring = JsonConvert.SerializeObject(gameModel);
-        //    File.WriteAllText($"playerName.json", jsonstring);
-        //}
-
-        //public IGameModel LoadFromJson(string playerName)
-        //{
-        //    return JsonConvert.DeserializeObject<IGameModel>(playerName);
-        //}
-        DirectoryInfo dInfo;
         public void StoreGameModel(IGameModel gameModel)
         {
-            string content = JsonSerializer.Serialize(gameModel);
+            string content = JsonConvert.SerializeObject(gameModel);
             DateTime now = DateTime.Now;
-            string path = $"{GameSettings.SaveDirectory}GameState-{GameSettings.HeroName}-{now.Year}-{now.Month}-{now.Day}-{now.Minute}-{now.Second}.json";
+            string path = Path.Combine("Saves",$"GameState-{gameModel.Player.PlayerName}-{now.Year}-{now.Month}-{now.Day}-{now.Minute}-{now.Second}.json");
             File.WriteAllText(path, content);
         }
         public IGameModel GetModel(string path)
         {
-            throw new NotImplementedException();
+           
+            return JsonConvert.DeserializeObject<GameModel>(File.ReadAllText(path));
         }
 
         public IGameModel GetLastState()
         {
-
+            string path= Directory.GetFiles("Saves").Where(x => x.StartsWith("GameState")).Last();
+            return JsonConvert.DeserializeObject<GameModel>(File.ReadAllText(path));
         }
 
         public IEnumerable<IGameModel> GetAll()
         {
-            return dInfo.GetFiles("*.json").Where(x => x.Name.StartsWith("GameState"))
-                      .Select(x => JsonSerializer.Deserialize<GameModel>($"{GameSettings.SaveDirectory}{x.Name}"))
-                      .ToList();
+            return Directory.GetFiles("Saves").Where(x => x.StartsWith("GameState")).Select(x=> JsonConvert.DeserializeObject<GameModel>(File.ReadAllText(x)));
+        }
+
+        public List<Card> GetAllCards()
+        {
+
         }
     }
 }
-/*
-        public void StoreGameModel(IGameModel gameModel)
-            { Serialize(gameModel); }
-
-//
-
-        private void Serialize<T>(T state)
-            {
-                try
-                {
-                    string content = JsonSerializer.Serialize(state);
-                    string path = GenerateSaveFilName();
-                    WriteFile(path, content);
-                }
-                catch (Exception exception) { WriteToLog(exception.Message); throw; }
-            }
-
-//
-
-            private string GenerateSaveFilName()
-            { DateTime now = DateTime.Now; 
-return $"{gameSettings.SaveDirectory}GameState-{gameSettings.HeroName}-{now.Year}-{now.Month}-{now.Day}-{now.Minute}-{now.Second}.json"; }
-
-//
-
-            private DirectoryInfo dInfo;
-
-//
-
-            public IEnumerable<IGameModel> GetAll()
-            {
-                return dInfo.GetFiles("*.json").Where(x => x.Name.StartsWith("GameState"))
-                      .Select(x => Deserialize<GameModel>($"{gameSettings.SaveDirectory}{x.Name}"))
-                      .ToList();
-            }
-
- */
