@@ -41,7 +41,17 @@ namespace Repository
 
         public List<Card> GetAllCards()
         {
+            //ID,COLOR,RARITY,CATEGORY,FILENAME
+            List<Card> cardList = new List<Card>();
+            string path = "AllCardsData.txt";
+            string[] cards = File.ReadAllLines(path);
+            
+            foreach (var item in cards)
+            {
+                cardList.Add(new Card(item.Split(',')));
+            }
 
+            return cardList;
         }
     }
 }
