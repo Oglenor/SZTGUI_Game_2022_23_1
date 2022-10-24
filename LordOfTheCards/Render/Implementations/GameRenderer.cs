@@ -1,4 +1,5 @@
 ﻿using Core.Interfaces;
+using Core.Models.Enums;
 using Core.Models.GameElements;
 using Render.Interfaces;
 using System;
@@ -24,29 +25,19 @@ namespace Render.Implementations
         private IGameModel gameModel;
         public IGameModel GameModel { get { return gameModel; } set { gameModel = value; } }
 
+        // TODO load from IGameSettings
+        private int tileWidth = 32;
+        private int tileHeight = 32;
+        private const string PATH_BASE = "Resources/Images/";
+        private const string TEST_MAP_NAME = "defaultmap";
+
         public GameRenderer(double width, double height, IGameModel gameModel)
         {
             this.width = width;
             this.height = height;            
             this.gameModel = gameModel;
-
-            string wallPath = $"Resources/Images/wall.png";
-            string floorPath = $"Resources/Images/floor.png";
-
-            itemBrushes = new Dictionary<string, Lazy<ImageBrush>>();
-            itemBrushes.Add("wall", new Lazy<ImageBrush>(() => LoadBrush(wallPath)));
-            itemBrushes.Add("floor", new Lazy<ImageBrush>(() => LoadBrush(floorPath)));
-
-        }
-
-        private ImageBrush LoadBrush(string wallPath)
-        {
-            var resultBrush = new ImageBrush(new BitmapImage(new Uri(wallPath, UriKind.Relative)));
-            resultBrush.TileMode = TileMode.Tile;
-            resultBrush.Viewport = new Rect(0, 0, 50, 50);
-            resultBrush.Stretch = Stretch.Uniform;
-            resultBrush.ViewportUnits = BrushMappingMode.Absolute;
-            return resultBrush;
+            itemBrushes = new Dictionary<string, Lazy<ImageBrush>>();           
+            LoadBrushes();
         }
 
         public Drawing GetDrawing()
@@ -56,63 +47,56 @@ namespace Render.Implementations
             return dg;
         }
 
+        #region Init_Brushes
+        private void LoadBrushes()
+        {
+            var brushNames = Enum.GetNames(typeof(BitMapType));
+            foreach (var item in brushNames)
+            {
+                itemBrushes.Add(item, new Lazy<ImageBrush>(() => LoadBrush($"{PATH_BASE}{item}.png")));
+            }
+        }
+
+        private ImageBrush LoadBrush(string name)
+        {
+            var resultBrush = new ImageBrush(new BitmapImage(new Uri(name, UriKind.Relative)));
+            resultBrush.TileMode = TileMode.Tile;
+            resultBrush.Viewport = new Rect(0, 0, tileWidth, tileHeight);
+            resultBrush.Stretch = Stretch.Uniform;
+            resultBrush.ViewportUnits = BrushMappingMode.Absolute;
+            return resultBrush;
+        }
+        #endregion
+
+        #region Draw_Items
         private Drawing DrawGameItems()
         {
             var dg = new DrawingGroup();
-
-            List<Tile> itemList = gameModel.Maps.GetValueOrDefault("defaultmap").Tiles.ToList();
-
-           /*
+            List<Tile> itemList = gameModel.Maps.GetValueOrDefault(TEST_MAP_NAME).Tiles.ToList();           
             foreach (var item in itemList)
             {                
-                if (item.IsSolid)
-                {
-                    dg.Children.Add(new GeometryDrawing(
-                    GetBrush("wall"),
-                    null,
-                    GetRectangleGeometry(item.X, item.Y, 50, 50)
-                    ));
-                }
-                else
-                {
-                    dg.Children.Add(new GeometryDrawing(
-                    GetBrush("floor"),
-                    null,
-                    GetRectangleGeometry(item.X, item.Y, 50, 50)
-                    ));
-                }
-                
+                dg.Children.Add(GetGeometryDrawing(item));                   
             }
-           */
-
-            LineGeometry blackLineGeometry = new LineGeometry();
-            blackLineGeometry.StartPoint = new Point(20, 20);
-            blackLineGeometry.EndPoint = new Point(300, 300);
-
-
-
-            // Create a red Brush  
-            SolidColorBrush redBrush = new SolidColorBrush();
-            redBrush.Color = Colors.Red;
-
-            Pen p = new Pen();
-
-            p.Brush = redBrush;
-
-            dg.Children.Add(new GeometryDrawing(null, p, blackLineGeometry));
-
             return dg;
         }
 
-        private Geometry GetRectangleGeometry(double x, double y, double width, double height)
+        private GeometryDrawing GetGeometryDrawing(Tile tile)
         {
-            return new RectangleGeometry(new Rect(x, y, width, height));
+            return new GeometryDrawing(
+                GetBrush(tile.type.ToString()),
+                null,
+                GetRectangleGeometry(tile.X, tile.Y));
         }
 
-        //Todo modify to enum type
+        private Geometry GetRectangleGeometry(double x, double y)
+        {
+            return new RectangleGeometry(new Rect(x, y, tileWidth, tileHeight));
+        }
+
         private ImageBrush GetBrush(string brusName)
         {
             return itemBrushes.GetValueOrDefault(brusName).Value;
         }
+        #endregion
     }
 }

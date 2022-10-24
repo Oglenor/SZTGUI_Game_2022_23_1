@@ -246,6 +246,11 @@ namespace Logic
             throw new NotImplementedException();
         }
 
+        public void SetCurrentCard(Card card)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
     }
 }

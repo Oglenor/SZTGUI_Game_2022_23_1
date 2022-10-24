@@ -1,5 +1,6 @@
 ﻿using Core.Interfaces;
 using Core.Models;
+using Core.Models.Enums;
 using Core.Models.GameElements;
 using Render.Implementations;
 using Render.Interfaces;
@@ -42,6 +43,10 @@ namespace LordOfTheCards.Controls
 
             if (window != null)
             {
+
+                int tileWidth = 32;
+                int tileHeight = 32;
+
                 IGameModel gameModel = new GameModel();
 
                 gameModel.Maps = new Dictionary<string, Core.Models.GameElements.Map>();
@@ -56,7 +61,12 @@ namespace LordOfTheCards.Controls
                     y = condition ? ++y : y;
                     x = condition ? 0 : ++x;
 
-                    tiles.Add(new Tile(x * 50, y * 50, k % 2 == 0));                                       
+                    Tile t = new Tile(x * tileWidth, y * tileHeight, k % 2 == 0);
+
+                    if (k % 2 == 0) t.type = BitMapType.floor;
+                    else t.type = BitMapType.wall;
+
+                    tiles.Add(t);                                       
                 }
 
                 m.Tiles = tiles;

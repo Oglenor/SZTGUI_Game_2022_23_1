@@ -9,8 +9,13 @@
     <Grid>
         <StackPanel>
             <Button Style="{DynamicResource ButtonStyle1}" Opacity="1" Margin="0 0 0 10" Width="200" Height="100" Click="NewGameClick" BorderThickness="0">
-             
+                New Game
             </Button>
+
+            <Button Style="{DynamicResource ButtonStyle1}" Opacity="1" Margin="0 0 0 10" Width="200" Height="100" Click="LevelDesignerClick" BorderThickness="0">
+                New Game
+            </Button>
+
         </StackPanel>
     </Grid>
 </Window>
