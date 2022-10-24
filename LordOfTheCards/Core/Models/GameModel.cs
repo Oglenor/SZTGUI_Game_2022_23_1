@@ -2,12 +2,12 @@
 using Core.Models.Characters;
 using Core.Models.GameElements;
 using Models.Enums;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Core.Models

@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Core.Interfaces;
 using Core.Models;
+using Core.Models.GameElements;
 using Core.Settings;
+using Newtonsoft.Json;
 using Repository.Interfaces;
 
 namespace Repository
@@ -16,25 +17,31 @@ namespace Repository
     {
         public void StoreGameModel(IGameModel gameModel)
         {
-            string content = JsonSerializer.Serialize(gameModel);
+            string content = JsonConvert.SerializeObject(gameModel);
             DateTime now = DateTime.Now;
             string path = Path.Combine("Saves",$"GameState-{gameModel.Player.PlayerName}-{now.Year}-{now.Month}-{now.Day}-{now.Minute}-{now.Second}.json");
             File.WriteAllText(path, content);
         }
         public IGameModel GetModel(string path)
         {
-            return JsonSerializer.Deserialize<GameModel>(path);
+           
+            return JsonConvert.DeserializeObject<GameModel>(File.ReadAllText(path));
         }
 
         public IGameModel GetLastState()
         {
             string path= Directory.GetFiles("Saves").Where(x => x.StartsWith("GameState")).Last();
-            return JsonSerializer.Deserialize<GameModel>(path);
+            return JsonConvert.DeserializeObject<GameModel>(File.ReadAllText(path));
         }
 
         public IEnumerable<IGameModel> GetAll()
         {
-            return Directory.GetFiles("Saves").Where(x => x.StartsWith("GameState")).Select(x=> JsonSerializer.Deserialize<GameModel>(x));
+            return Directory.GetFiles("Saves").Where(x => x.StartsWith("GameState")).Select(x=> JsonConvert.DeserializeObject<GameModel>(File.ReadAllText(x)));
+        }
+
+        public List<Card> GetAllCards()
+        {
+
         }
     }
 }
