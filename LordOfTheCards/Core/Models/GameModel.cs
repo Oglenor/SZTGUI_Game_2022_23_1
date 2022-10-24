@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Core.Models
@@ -16,6 +17,7 @@ namespace Core.Models
         public Dictionary<string, Map> Maps { get; set; }
         public Player Player { get; set; }
         public List<Enemy> EnemyList { get; set; }
+        [JsonIgnore]
         public List<Card> AllCards { get; set; }
         public Battlefield Battlefield { get; set; }
 
