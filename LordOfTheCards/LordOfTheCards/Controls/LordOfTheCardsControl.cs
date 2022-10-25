@@ -17,12 +17,15 @@ namespace LordOfTheCards.Controls
 {
     public class LordOfTheCardsControl : FrameworkElement
     {
-        IGameRenderer gameRenderer;      
+        private readonly IGameSettings gameSettings;
+        private IGameRenderer gameRenderer;
+        private IGameModel gameModel;
 
         private static LordOfTheCardsControl instance = null;
 
         private LordOfTheCardsControl()
         {
+            this.gameSettings = GameSettings.Instance;
             Loaded += LordOfTheCardsControl_Loaded;
         }
 
@@ -45,7 +48,7 @@ namespace LordOfTheCards.Controls
             if (window != null)
             {
                 IGameSettings gameSettings = GameSettings.Instance;
-                IGameModel gameModel = new GameModel();
+                this.gameModel = new GameModel();
 
                 gameModel.Maps = new Dictionary<string, Map>();
                 Map m = new Map(gameSettings.DefaultMapName, 5, 5);
@@ -71,7 +74,7 @@ namespace LordOfTheCards.Controls
 
                 m.Tiles = tiles;
                 gameModel.Maps.Add(m.Name, m);                
-                gameRenderer = new GameRenderer(gameModel, gameSettings);
+                gameRenderer = new GameRenderer();
 
                 InvalidateVisual();
             }
@@ -79,9 +82,9 @@ namespace LordOfTheCards.Controls
 
         protected override void OnRender(DrawingContext drawingContext)
         {
-            if (gameRenderer != null && gameRenderer.GameModel != null)
+            if (gameRenderer != null && this.gameModel != null)
             {
-                drawingContext.DrawDrawing(gameRenderer.GetDrawing(gameRenderer.GameModel.Maps.GetValueOrDefault(gameRenderer.GameSettings.DefaultMapName).Tiles));
+                drawingContext.DrawDrawing(gameRenderer.GetDrawing(this.gameModel.Maps.GetValueOrDefault(gameSettings.DefaultMapName).Tiles));
             }
         }
     }

@@ -1,6 +1,7 @@
 ﻿using Core.Interfaces;
 using Core.Models.Enums;
 using Core.Models.GameElements;
+using Core.Settings;
 using Render.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -17,37 +18,44 @@ namespace Render.Implementations
 {
     public class GameRenderer : IGameRenderer
     {
-        readonly Dictionary<string, Lazy<ImageBrush>> itemBrushes;
-        private IGameModel gameModel;
-        private IGameSettings gameSettings;
-        public IGameModel GameModel { get => gameModel; set => gameModel = value; }
-        public IGameSettings GameSettings { get => gameSettings; set => gameSettings = value; }      
+        private readonly IGameSettings gameSettings;
+        private readonly Dictionary<string, Lazy<ImageBrush>> itemBrushes;
+        private DrawingGroup drawingGroup;
 
-        public GameRenderer(IGameModel gameModel, IGameSettings gameSettings)
+        public GameRenderer()
         {
-            this.gameModel = gameModel;
-            this.gameSettings = gameSettings;
-            itemBrushes = new Dictionary<string, Lazy<ImageBrush>>();           
+            gameSettings = GameSettings.Instance;
+            itemBrushes = new Dictionary<string, Lazy<ImageBrush>>();
             LoadBrushes();
         }
 
-
-
         public Drawing GetDrawing(IEnumerable<StaticGameItem> collection)
         {
-            var dg = new DrawingGroup();
-            dg.Children.Add(DrawGameItems(collection));
-            return dg;
+            drawingGroup = new DrawingGroup();
+            collection.ToList().ForEach(x => drawingGroup.Children.Add(GetGeometryDrawing(x)));
+            return drawingGroup;
         }
 
-        #region Init_Brushes
+        private GeometryDrawing GetGeometryDrawing(StaticGameItem item)
+        {
+            return new GeometryDrawing(GetBrush(item.type.ToString()), null, GetRectangleGeometry(item));
+        }
+
+        private ImageBrush GetBrush(string brusName)
+        {
+            return GetItemFromMap(brusName, itemBrushes).Value;
+        }
+
+        private Geometry GetRectangleGeometry(StaticGameItem item)
+        {
+            return new RectangleGeometry(new Rect(item.X, item.Y, item.Width, item.Height));
+        }
+
         private void LoadBrushes()
         {
-            var brushNames = Enum.GetNames(typeof(BitMapType));
-            foreach (var item in brushNames)
-            {
-                itemBrushes.Add(item, new Lazy<ImageBrush>(() => LoadBrush($"{gameSettings.ResourcesPath}{item}.png")));
-            }
+            Enum.GetNames(typeof(BitMapType))
+                .ToList()
+                .ForEach(x => itemBrushes.Add(x, new Lazy<ImageBrush>(() => LoadBrush($"{gameSettings.ResourcesPath}{x}.png"))));
         }
 
         private ImageBrush LoadBrush(string name)
@@ -58,33 +66,6 @@ namespace Render.Implementations
             resultBrush.Stretch = Stretch.Uniform;
             resultBrush.ViewportUnits = BrushMappingMode.Absolute;
             return resultBrush;
-        }
-        #endregion
-
-        #region Draw_Items
-        private Drawing DrawGameItems(IEnumerable<StaticGameItem> collection)
-        {
-            var dg = new DrawingGroup();
-            collection.ToList().ForEach(x => dg.Children.Add(GetGeometryDrawing(x)));
-            return dg;
-        }
-
-        private GeometryDrawing GetGeometryDrawing(StaticGameItem item)
-        {
-            return new GeometryDrawing(
-                GetBrush(item.type.ToString()),
-                null,
-                GetRectangleGeometry(item));
-        }
-
-        private Geometry GetRectangleGeometry(StaticGameItem item)
-        {
-            return new RectangleGeometry(new Rect(item.X, item.Y, item.Width, item.Height));
-        }
-
-        private ImageBrush GetBrush(string brusName)
-        {
-            return GetItemFromMap(brusName, itemBrushes).Value;            
         }
 
         private V GetItemFromMap<K,V>(K key, IDictionary<K,V> map)
@@ -99,6 +80,5 @@ namespace Render.Implementations
                 throw new KeyNotFoundException($"Key: {key}, was not found!");
             }
         }
-        #endregion
     }
 }
