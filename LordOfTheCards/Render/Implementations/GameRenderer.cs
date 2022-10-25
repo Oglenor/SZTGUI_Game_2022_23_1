@@ -32,23 +32,13 @@ namespace Render.Implementations
         public Drawing GetDrawing(IEnumerable<StaticGameItem> collection)
         {
             drawingGroup = new DrawingGroup();
-            collection.ToList().ForEach(x => drawingGroup.Children.Add(GetGeometryDrawing(x)));
+
+            collection.ToList()
+                .Select(gameItem => new GeometryDrawing(GetItemFromMap(gameItem.type.ToString(), itemBrushes).Value, null, new RectangleGeometry(new Rect(gameItem.X, gameItem.Y, gameItem.Width, gameItem.Height))))
+                .ToList()
+                .ForEach(x => drawingGroup.Children.Add(x));
+
             return drawingGroup;
-        }
-
-        private GeometryDrawing GetGeometryDrawing(StaticGameItem item)
-        {
-            return new GeometryDrawing(GetBrush(item.type.ToString()), null, GetRectangleGeometry(item));
-        }
-
-        private ImageBrush GetBrush(string brusName)
-        {
-            return GetItemFromMap(brusName, itemBrushes).Value;
-        }
-
-        private Geometry GetRectangleGeometry(StaticGameItem item)
-        {
-            return new RectangleGeometry(new Rect(item.X, item.Y, item.Width, item.Height));
         }
 
         private void LoadBrushes()
@@ -70,8 +60,7 @@ namespace Render.Implementations
 
         private V GetItemFromMap<K,V>(K key, IDictionary<K,V> map)
         {
-            V value;
-            if (map.TryGetValue(key, out value))
+            if (map.TryGetValue(key, out V? value))
             {
                 return value;
             }
