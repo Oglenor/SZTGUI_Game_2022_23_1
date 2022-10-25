@@ -13,7 +13,7 @@ namespace Repository.Interfaces
         void StoreGameModel(IGameModel gameModel);
 
         //Load State
-        IGameModel GetModel(string path);
+        IGameModel GetModel(string fileName);
         IGameModel GetLastState();
         IEnumerable<IGameModel> GetAll();
     }

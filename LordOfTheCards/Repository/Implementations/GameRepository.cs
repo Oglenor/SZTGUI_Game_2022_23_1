@@ -15,23 +15,38 @@ namespace Repository
 {
     public class GameRepository : IGameRepository
     {
-
         private IGameSettings gameSettings;
-        //private IGameModel gameModel;
+        private DirectoryInfo directoryInfo;
+
         public GameRepository()
         {
             gameSettings = GameSettings.Instance;
+            directoryInfo = new DirectoryInfo(gameSettings.SavesPath);
         }
 
         public IGameModel GetLastState()
         {
-            DirectoryInfo directoryInfo = new DirectoryInfo(gameSettings.SavesPath);            
-            return Deserialize<GameModel>(Path.Combine(gameSettings.SavesPath, directoryInfo
+            string fileName = directoryInfo
                 .GetFiles()
                 .Where(x => x.Name.StartsWith(gameSettings.SavedStatesPrefix))
                 .OrderByDescending(f => f.LastWriteTime)
-                .First()
-                .Name));
+                .First().Name;
+            
+            return Deserialize<GameModel>(Path.Combine(gameSettings.SavesPath, fileName));
+        }
+
+        public IGameModel GetModel(string fileName)
+        {
+            return Deserialize<GameModel>(Path.Combine(gameSettings.SavesPath, fileName));
+        }
+
+        public IEnumerable<IGameModel> GetAll()
+        {
+            return directoryInfo
+                .GetFiles(gameSettings.FileExtSuffix)
+                .Where(x => x.Name.StartsWith(gameSettings.SavedStatesPrefix))
+                .Select(x => Deserialize<GameModel>(Path.Combine(gameSettings.SavesPath, x.Name)))
+                .ToList();
         }
 
         private T Deserialize<T>(string path)
@@ -70,22 +85,6 @@ namespace Repository
         private string GetFileName()
         {
             return $"{gameSettings.SavedStatesPrefix}{DateTime.Now.ToString(gameSettings.DefaultDateTimeFormat)}{gameSettings.FileExtSuffix}";
-        }
-
-
-
-
-
-        public IGameModel GetModel(string path)
-        {
-            throw new NotImplementedException();
-        }
-
-
-
-        public IEnumerable<IGameModel> GetAll()
-        {
-            throw new NotImplementedException();
         }
     }
 }
