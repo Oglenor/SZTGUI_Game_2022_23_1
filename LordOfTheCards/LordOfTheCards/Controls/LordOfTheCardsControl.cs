@@ -81,15 +81,7 @@ namespace LordOfTheCards.Controls
         {
             if (gameRenderer != null && gameRenderer.GameModel != null)
             {
-
-                Map m = gameRenderer.GameModel.Maps.GetValueOrDefault(gameRenderer.GameSettings.DefaultMapName);
-                IEnumerable<StaticGameItem> t = null;
-                if (m != null)
-                    t = m.Tiles;
-
-
-                drawingContext.DrawDrawing(gameRenderer.GetDrawing(t));
-                ;
+                drawingContext.DrawDrawing(gameRenderer.GetDrawing(gameRenderer.GameModel.Maps.GetValueOrDefault(gameRenderer.GameSettings.DefaultMapName).Tiles));
             }
         }
     }
