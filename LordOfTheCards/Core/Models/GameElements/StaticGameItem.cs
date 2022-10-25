@@ -14,6 +14,10 @@ namespace Core.Models.GameElements
         public int Id { get; }
         public double X { get; set; }
         public double Y { get; set; }
+
+        public double Width { get; set; }
+        public double Height { get; set; }
+
         public int Z { get; set; }
         public Orientations Orientation { get; set; }
         public bool IsAnimated { get; set; }

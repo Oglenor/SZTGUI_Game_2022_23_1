@@ -9,7 +9,28 @@ using System.Threading.Tasks;
 namespace Core.Settings
 {
     public class GameSettings : IGameSettings
-    {        
+    {
+        private static GameSettings instance = null;
+
+        private GameSettings()
+        {
+
+        }
+
+        public static GameSettings Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    return new GameSettings();
+                }
+                else
+                {
+                    return instance;
+                }
+            }
+        }
         public string DefaultHeroName => "MightyHero";       
         public string SavesPath => Path.Combine(Environment.CurrentDirectory, @"Saves\DefaultGameState.json");
         public string ResourcesPath => Path.Combine(Environment.CurrentDirectory, @"Resources\Images\");

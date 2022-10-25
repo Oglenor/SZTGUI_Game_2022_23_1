@@ -1,4 +1,5 @@
 ﻿using Core.Interfaces;
+using Core.Models.GameElements;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,6 @@ namespace Render.Interfaces
     {
         IGameSettings GameSettings { get; set; }
         IGameModel GameModel { get; set; }
-        Drawing GetDrawing();
+        Drawing GetDrawing(IEnumerable<StaticGameItem> collection);
     }
 }

@@ -44,7 +44,7 @@ namespace LordOfTheCards.Controls
 
             if (window != null)
             {
-                IGameSettings gameSettings = new GameSettings();
+                IGameSettings gameSettings = GameSettings.Instance;
                 IGameModel gameModel = new GameModel();
 
                 gameModel.Maps = new Dictionary<string, Map>();
@@ -59,6 +59,9 @@ namespace LordOfTheCards.Controls
                     x = condition ? 0 : ++x;
 
                     Tile t = new Tile(x * gameSettings.TileWidth, y * gameSettings.TileHeight, k % 2 == 0);
+
+                    t.Width = gameSettings.TileWidth;
+                    t.Height = gameSettings.TileHeight;
 
                     if (k % 2 == 0) t.type = BitMapType.floor;
                     else t.type = BitMapType.wall;
@@ -76,9 +79,17 @@ namespace LordOfTheCards.Controls
 
         protected override void OnRender(DrawingContext drawingContext)
         {
-            if (gameRenderer != null)
+            if (gameRenderer != null && gameRenderer.GameModel != null)
             {
-                drawingContext.DrawDrawing(gameRenderer.GetDrawing());
+
+                Map m = gameRenderer.GameModel.Maps.GetValueOrDefault(gameRenderer.GameSettings.DefaultMapName);
+                IEnumerable<StaticGameItem> t = null;
+                if (m != null)
+                    t = m.Tiles;
+
+
+                drawingContext.DrawDrawing(gameRenderer.GetDrawing(t));
+                ;
             }
         }
     }

@@ -1,5 +1,6 @@
 ﻿using LordOfTheCards.Logic.Implementations;
 using LordOfTheCards.Logic.Interfaces;
+using LordOfTheCards.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,10 +33,20 @@ namespace LordOfTheCards
 
         private void NewGameClick(object sender, RoutedEventArgs e)
         {
-            gameDisplayService.Display();
+            gameDisplayService.Display(typeof(GameWindow));
         }
 
         private void LevelDesignerClick(object sender, RoutedEventArgs e)
+        {
+            gameDisplayService.Display(typeof(DesignerWindow));
+        }
+
+        private void ContinueClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void SettingsClick(object sender, RoutedEventArgs e)
         {
 
         }

@@ -31,10 +31,12 @@ namespace Render.Implementations
             LoadBrushes();
         }
 
-        public Drawing GetDrawing()
+
+
+        public Drawing GetDrawing(IEnumerable<StaticGameItem> collection)
         {
             var dg = new DrawingGroup();
-            dg.Children.Add(DrawGameItems());
+            dg.Children.Add(DrawGameItems(collection));
             return dg;
         }
 
@@ -60,28 +62,24 @@ namespace Render.Implementations
         #endregion
 
         #region Draw_Items
-        private Drawing DrawGameItems()
+        private Drawing DrawGameItems(IEnumerable<StaticGameItem> collection)
         {
             var dg = new DrawingGroup();
-            GetItemFromMap(GameSettings.DefaultMapName, gameModel.Maps)
-                .Tiles
-                .ToList()
-                .ForEach(x => dg.Children.Add(GetGeometryDrawing(x)));
-
+            collection.ToList().ForEach(x => dg.Children.Add(GetGeometryDrawing(x)));
             return dg;
         }
 
-        private GeometryDrawing GetGeometryDrawing(Tile tile)
+        private GeometryDrawing GetGeometryDrawing(StaticGameItem item)
         {
             return new GeometryDrawing(
-                GetBrush(tile.type.ToString()),
+                GetBrush(item.type.ToString()),
                 null,
-                GetRectangleGeometry(tile.X, tile.Y));
+                GetRectangleGeometry(item));
         }
 
-        private Geometry GetRectangleGeometry(double x, double y)
+        private Geometry GetRectangleGeometry(StaticGameItem item)
         {
-            return new RectangleGeometry(new Rect(x, y, gameSettings.TileWidth, gameSettings.TileHeight));
+            return new RectangleGeometry(new Rect(item.X, item.Y, item.Width, item.Height));
         }
 
         private ImageBrush GetBrush(string brusName)
