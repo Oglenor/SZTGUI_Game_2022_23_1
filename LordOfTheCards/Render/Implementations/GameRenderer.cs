@@ -50,9 +50,10 @@ namespace Render.Implementations
 
         private ImageBrush LoadBrush(string name)
         {
-            var resultBrush = new ImageBrush(new BitmapImage(new Uri(name, UriKind.Relative)));
+            var bitMap = new BitmapImage(new Uri(name, UriKind.Relative));           
+            var resultBrush = new ImageBrush(bitMap);
             resultBrush.TileMode = TileMode.Tile;
-            resultBrush.Viewport = new Rect(0, 0, gameSettings.TileWidth, gameSettings.TileHeight);
+            resultBrush.Viewport = new Rect(0, 0, bitMap.Width, bitMap.Height);
             resultBrush.Stretch = Stretch.Uniform;
             resultBrush.ViewportUnits = BrushMappingMode.Absolute;
             return resultBrush;

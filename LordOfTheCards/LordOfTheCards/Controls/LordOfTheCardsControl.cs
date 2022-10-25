@@ -84,8 +84,21 @@ namespace LordOfTheCards.Controls
         {
             if (gameRenderer != null && this.gameModel != null)
             {
-                drawingContext.DrawDrawing(gameRenderer.GetDrawing(this.gameModel.Maps.GetValueOrDefault(gameSettings.DefaultMapName).Tiles));
+                drawingContext.DrawDrawing(gameRenderer.GetDrawing(GetCardsTest()));
             }
+        }
+
+
+        private IEnumerable<StaticGameItem> GetCardsTest()
+        {
+            var cards = new List<StaticGameItem>();
+            var enemyCard = new Card(); var playerCard = new Card();
+            enemyCard.X=0; enemyCard.Y=0; enemyCard.Width=500; enemyCard.Height=640;
+            enemyCard.type = BitMapType.enemycurrentcard;
+            playerCard.X=1000; playerCard.Y=0; playerCard.Width=500; playerCard.Height=640;
+            playerCard.type = BitMapType.playercurrentcard;
+            cards.Add(playerCard); cards.Add(enemyCard);
+            return cards;
         }
     }
 }

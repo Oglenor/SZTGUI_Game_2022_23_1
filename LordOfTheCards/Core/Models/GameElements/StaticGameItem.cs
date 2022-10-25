@@ -24,6 +24,11 @@ namespace Core.Models.GameElements
 
         public BitMapType type { get; set; }
 
+        public StaticGameItem()
+        {
+
+        }
+
         public StaticGameItem(double x, double y)
         {
             Id = ++idGen;

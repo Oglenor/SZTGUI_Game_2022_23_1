@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Core.Models.GameElements
 {
-    public class Card
+    public class Card : StaticGameItem
     {
         private int id;
         private Token token;
@@ -44,6 +44,12 @@ namespace Core.Models.GameElements
             set { assetPath = value; }
         }
 
+
+        public Card()
+        {
+
+        }
+
         //txt beolvasásra volt, lehet most már törölhető
         public Card(string[] dataLine)
         {
@@ -66,10 +72,6 @@ namespace Core.Models.GameElements
             token = new Token(color, category);
 
             assetPath = path;
-        }
-
-        public Card()
-        {
         }
 
         public void Action(Battlefield battlefield, PlayerEntity entity)

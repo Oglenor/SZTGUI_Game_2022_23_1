@@ -9,6 +9,8 @@ namespace Core.Models.Enums
     public enum BitMapType
     {
         wall,
-        floor
+        floor,
+        playercurrentcard,
+        enemycurrentcard
     }
 }

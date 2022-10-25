@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LordOfTheCards.Windows"
         mc:Ignorable="d"
-        Title="GameWindow" Height="800" Width="800">
+        Title="GameWindow" Height="1080" Width="1920">
     <Grid>
         
     </Grid>
