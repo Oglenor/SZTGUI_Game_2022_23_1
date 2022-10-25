@@ -17,7 +17,7 @@ namespace Repository
     {
 
         private IGameSettings gameSettings;
-        private IGameModel gameModel;
+        //private IGameModel gameModel;
         public GameRepository()
         {
             gameSettings = GameSettings.Instance;
@@ -71,6 +71,10 @@ namespace Repository
         {
             return $"{gameSettings.SavedStatesPrefix}{DateTime.Now.ToString(gameSettings.DefaultDateTimeFormat)}{gameSettings.FileExtSuffix}";
         }
+
+
+
+
 
         public IGameModel GetModel(string path)
         {
