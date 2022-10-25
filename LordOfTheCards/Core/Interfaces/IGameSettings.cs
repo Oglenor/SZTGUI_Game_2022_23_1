@@ -10,6 +10,9 @@ namespace Core.Interfaces
     {
         string DefaultHeroName { get; }
         string SavesPath { get; }
+        string SavedStatesPrefix { get; }
+        string FileExtSuffix { get; }
+        string DefaultDateTimeFormat { get; }
         string ResourcesPath { get; }
         string DefaultMapName { get; }
         double TileWidth { get; }
