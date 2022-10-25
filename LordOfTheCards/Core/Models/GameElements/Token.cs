@@ -15,10 +15,12 @@ namespace Core.Models.GameElements
         public Colors Color
         {
             get { return color; }
+            set { color = value; }
         }
         public Categories Category
         {
             get { return category; }
+            set { category = value; }
         }
 
         public Token(Colors color, Categories category)

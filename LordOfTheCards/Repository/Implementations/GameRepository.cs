@@ -19,39 +19,33 @@ namespace Repository
         {
             string content = JsonConvert.SerializeObject(gameModel);
             DateTime now = DateTime.Now;
-            string path = Path.Combine("Saves",$"GameState-{gameModel.Player.PlayerName}-{now.Year}-{now.Month}-{now.Day}-{now.Minute}-{now.Second}.json");
+            string path = Path.Combine("Saves", $"GameState-{gameModel.Player.PlayerName}-{now.Year}-{now.Month}-{now.Day}-{now.Minute}-{now.Second}.json");
             File.WriteAllText(path, content);
         }
         public IGameModel GetModel(string path)
         {
-           
+
             return JsonConvert.DeserializeObject<GameModel>(File.ReadAllText(path));
         }
 
         public IGameModel GetLastState()
         {
-            string path= Directory.GetFiles("Saves").Where(x => x.StartsWith("GameState")).Last();
+            string path = Directory.GetFiles("Saves").Where(x => x.StartsWith("GameState")).Last();
             return JsonConvert.DeserializeObject<GameModel>(File.ReadAllText(path));
         }
 
         public IEnumerable<IGameModel> GetAll()
         {
-            return Directory.GetFiles("Saves").Where(x => x.StartsWith("GameState")).Select(x=> JsonConvert.DeserializeObject<GameModel>(File.ReadAllText(x)));
+            return Directory.GetFiles("Saves").Where(x => x.StartsWith("GameState")).Select(x => JsonConvert.DeserializeObject<GameModel>(File.ReadAllText(x)));
         }
 
         public List<Card> GetAllCards()
-        {
-            //ID,COLOR,RARITY,CATEGORY,FILENAME
-            List<Card> cardList = new List<Card>();
-            string path = "AllCardsData.txt";
-            string[] cards = File.ReadAllLines(path);
-            
-            foreach (var item in cards)
-            {
-                cardList.Add(new Card(item.Split(',')));
-            }
+        {  //ID,COLOR,RARITY,CATEGORY,FILENAME
 
-            return cardList;
+            string jsonPath = Path.Combine("AllCards", "AllCardsData.json");
+            string content = File.ReadAllText(jsonPath);
+
+           return JsonConvert.DeserializeObject<List<Card>>(content);
         }
     }
 }

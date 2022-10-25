@@ -21,22 +21,27 @@ namespace Core.Models.GameElements
         public int ID
         {
             get { return id; }
+            set { id = value; }
         }
         public Token Token
         {
             get { return token; }
+            set { token = value; }
         }
         public Colors Color
 		{
 			get { return color; }
-		}
+            set { color = value; }
+        }
         public Rarities Rarity
         {
             get { return rarity; }
+            set { rarity = value; }
         }
         public Categories Category
         {
             get { return category; }
+            set { category = value; }
         }
         public string AssetPath
         {
