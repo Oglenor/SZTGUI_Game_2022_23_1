@@ -16,6 +16,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Resources\Images\base.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Resources\Images\blank.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

@@ -1,7 +1,9 @@
-﻿using Core.Settings;
+﻿using Core.Interfaces;
+using Core.Settings;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Xml.Linq;
+using Path = System.IO.Path;
 
 namespace LordOfTheCards.Windows
 {
@@ -27,35 +30,65 @@ namespace LordOfTheCards.Windows
             InitializeComponent();
             DataContext = this;
         }
-        private ImageSource _myImageSource = new BitmapImage(new Uri($"{GameSettings.Instance.ResourcesPath}floor.png", UriKind.Relative));
 
-        public ImageSource MyImageSource
+        private void OnMouseEnter(object sender, MouseEventArgs e)
         {
-            get { return _myImageSource; }
-            set
+            Rectangle source = e.Source as Rectangle;
+
+
+            var bitMap = new BitmapImage(new Uri($"{Path.Combine(Environment.CurrentDirectory, @"Resources\Images\")}base.png", UriKind.Relative));
+            var resultBrush = new ImageBrush(bitMap);
+            if (source != null)
             {
-                _myImageSource = value;
-                OnPropertyChanged("MyImageSource");
+                
+        
+                
+
+
+                (e.Source as Rectangle).Fill = resultBrush;
+
+
+
             }
+
+            txt1.Text = "Mouse Entered";
         }
 
-        private void ImageButton_Click(object sender, RoutedEventArgs e)
+        private void OnMouseLeave(object sender, MouseEventArgs e)
         {
-
-            string name = $"{GameSettings.Instance.ResourcesPath}floor.png";
-
-            BitmapImage im = new BitmapImage(new Uri($"{GameSettings.Instance.ResourcesPath}floor.png", UriKind.Relative));
+            Rectangle source = e.Source as Rectangle;
 
 
-            this.MyImageSource = im;
+
+
+            if (source != null)
+            {
+                (e.Source as Rectangle).Fill = Brushes.Cyan;
+            }
+            
+
+
+            txt1.Text = "Mouse Leave";
+            txt2.Text = "";
+            txt3.Text = "";
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyChanged(string propertyName)
+        private void OnMouseMove(object sender, MouseEventArgs e)
         {
-            var handler = PropertyChanged;
-            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+            Point pnt = e.GetPosition(mrRec);
+            txt2.Text = "Mouse Move: " + pnt.ToString();
+        }
+
+        private void OnMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Rectangle source = e.Source as Rectangle;
+            Point pnt = e.GetPosition(mrRec);
+            txt3.Text = "Mouse Click: " + pnt.ToString();
+
+            if (source != null)
+            {
+                source.Fill = Brushes.Beige;
+            }
         }
     }
 }

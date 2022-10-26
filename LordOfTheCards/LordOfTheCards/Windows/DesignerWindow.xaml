@@ -6,22 +6,20 @@
         xmlns:local="clr-namespace:LordOfTheCards.Windows"
         mc:Ignorable="d"
         Title="DesignerWindow" Height="450" Width="800">
-    <Window.Resources>
-        <Style TargetType="{x:Type Button}" x:Key="ImageButtonStyle">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <ContentPresenter/>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </Window.Resources>
-    <Grid>
+    <Grid x:Name="DesignerGrid">
         <StackPanel>
-            <Button Style="{StaticResource ImageButtonStyle}" Click="ImageButton_Click" Opacity="1" Margin="0 0 0 10" Width="200" Height="100"> 
-                <Image Source="{Binding MyImageSource}"/> 
-            </Button>
+            <Rectangle x:Name = "mrRec" Fill = "AliceBlue" 
+                MouseLeftButtonUp = "OnMouseEnter" MouseLeave = "OnMouseLeave"  
+                MouseMove = "OnMouseMove" MouseDown = "OnMouseDown" Height = "100" Margin = "20">
+            </Rectangle>
+
+            <TextBlock x:Name = "txt1" Height = "31" HorizontalAlignment = "Right" 
+         Width = "250" Margin = "0,0,294,0" />
+            <TextBlock x:Name = "txt2" Height = "31" HorizontalAlignment = "Right"  
+         Width = "250" Margin = "0,0,294,0" />
+            <TextBlock x:Name = "txt3" Height = "31" HorizontalAlignment = "Right"  
+         Width = "250" Margin = "0,0,294,0" />
+        
         </StackPanel>
     </Grid>
 
