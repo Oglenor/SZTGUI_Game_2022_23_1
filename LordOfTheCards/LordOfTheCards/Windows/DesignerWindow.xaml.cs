@@ -28,66 +28,15 @@ namespace LordOfTheCards.Windows
         public DesignerWindow()
         {
             InitializeComponent();
-            DataContext = this;
         }
 
-        private void OnMouseEnter(object sender, MouseEventArgs e)
-        {
-            Rectangle source = e.Source as Rectangle;
-
-
-            var bitMap = new BitmapImage(new Uri($"{Path.Combine(Environment.CurrentDirectory, @"Resources\Images\")}base.png", UriKind.Relative));
-            var resultBrush = new ImageBrush(bitMap);
-            if (source != null)
+        private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {            
+            if (e.Source is Label)
             {
-                
-        
-                
-
-
-                (e.Source as Rectangle).Fill = resultBrush;
-
-
-
-            }
-
-            txt1.Text = "Mouse Entered";
-        }
-
-        private void OnMouseLeave(object sender, MouseEventArgs e)
-        {
-            Rectangle source = e.Source as Rectangle;
-
-
-
-
-            if (source != null)
-            {
-                (e.Source as Rectangle).Fill = Brushes.Cyan;
-            }
-            
-
-
-            txt1.Text = "Mouse Leave";
-            txt2.Text = "";
-            txt3.Text = "";
-        }
-
-        private void OnMouseMove(object sender, MouseEventArgs e)
-        {
-            Point pnt = e.GetPosition(mrRec);
-            txt2.Text = "Mouse Move: " + pnt.ToString();
-        }
-
-        private void OnMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            Rectangle source = e.Source as Rectangle;
-            Point pnt = e.GetPosition(mrRec);
-            txt3.Text = "Mouse Click: " + pnt.ToString();
-
-            if (source != null)
-            {
-                source.Fill = Brushes.Beige;
+                var bitMap = new BitmapImage(new Uri($"{Path.Combine(Environment.CurrentDirectory, @"Resources\Images\")}base.png", UriKind.Relative));
+                var resultBrush = new ImageBrush(bitMap);
+                (e.Source as Label).Background = resultBrush;                
             }
         }
     }
