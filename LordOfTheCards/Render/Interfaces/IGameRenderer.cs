@@ -11,6 +11,6 @@ namespace Render.Interfaces
 {
     public interface IGameRenderer
     {
-        Drawing GetDrawing(IEnumerable<StaticGameItem> collection);
+        Drawing Display(IEnumerable<StaticGameItem> collection);
     }
 }

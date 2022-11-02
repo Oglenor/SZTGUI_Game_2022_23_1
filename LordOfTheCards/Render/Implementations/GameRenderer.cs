@@ -29,7 +29,7 @@ namespace Render.Implementations
             LoadBrushes();
         }
 
-        public Drawing GetDrawing(IEnumerable<StaticGameItem> collection)
+        public Drawing Display(IEnumerable<StaticGameItem> collection)
         {
             drawingGroup = new DrawingGroup();
 

@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.3.32922.545
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LordOfTheCards", "LordOfTheCards\LordOfTheCards.csproj", "{7A75E7A3-EA10-47A1-B7D0-F66271E2E934}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Logic", "Logic\Logic.csproj", "{5E78577D-1A98-4FB1-B79C-5790B22414DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LordOfTheCards.Logic", "Logic\LordOfTheCards.Logic.csproj", "{5E78577D-1A98-4FB1-B79C-5790B22414DF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Render", "Render\Render.csproj", "{43CD242B-3D6F-41CF-8FDC-2F1E447BB59E}"
 EndProject

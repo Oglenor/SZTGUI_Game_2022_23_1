@@ -84,7 +84,7 @@ namespace LordOfTheCards.Controls
         {
             if (gameRenderer != null && this.gameModel != null)
             {
-                drawingContext.DrawDrawing(gameRenderer.GetDrawing(GetCardsTest()));
+                drawingContext.DrawDrawing(gameRenderer.Display(GetCardsTest()));
             }
         }
 
