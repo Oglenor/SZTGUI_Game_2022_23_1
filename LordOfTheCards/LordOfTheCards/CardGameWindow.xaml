@@ -23,16 +23,16 @@
             <ColumnDefinition Width="2*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" Grid.Column="0">
             <ListBox HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <Button ></Button>
+                
             </ListBox>
             <ListBox HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <Button></Button>
+                
 
             </ListBox>
             <ListBox HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <Button></Button>
+                
 
             </ListBox>
         </StackPanel>
@@ -41,12 +41,26 @@
         <Image HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2" Source="/AirMonk.jpg" Margin="5"/>
 
 
-        <Image HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" Grid.Column="0" Source="/AirMonk.jpg" Margin="2"/>
-        <Image HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" Grid.Column="1" Source="/AirMonk.jpg" Margin="2"/>
-        <Image HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" Grid.Column="2" Source="/AirMonk.jpg" Margin="2"/>
+        <Image HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" Grid.Column="0" Source="/AirMonk.jpg" Margin="2" x:Name="PlayerCard1_Image"/>
+        <Image HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" Grid.Column="1" Source="/AirMonk.jpg" Margin="2" x:Name="PlayerCard2_Image"/>
+        <Image HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" Grid.Column="2" Source="/AirMonk.jpg" Margin="2" x:Name="PlayerCard3_Image"/>
 
         <Image HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" Grid.Column="5" Source="/AirMonk.jpg" Margin="2"/>
         <Image HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" Grid.Column="6" Source="/AirMonk.jpg" Margin="2"/>
         <Image HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" Grid.Column="7" Source="/AirMonk.jpg" Margin="2"/>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" Grid.Column="8">
+            <ListBox HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+
+            </ListBox>
+            <ListBox HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+
+
+            </ListBox>
+            <ListBox HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+
+
+            </ListBox>
+        </StackPanel>
     </Grid>
 </Window>
