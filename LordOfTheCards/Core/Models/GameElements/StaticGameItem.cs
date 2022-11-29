@@ -1,4 +1,5 @@
 ﻿using Core.Enums;
+using Core.Models.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,8 @@ namespace Core.Models.GameElements
         public int Z { get; set; }
         public Orientations Orientation { get; set; }
         public bool IsAnimated { get; set; }
+
+        public BitMapType type { get; set; }
 
         public StaticGameItem(double x, double y)
         {

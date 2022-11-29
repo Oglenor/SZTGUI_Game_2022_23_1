@@ -34,5 +34,10 @@ namespace LordOfTheCards
         {
             gameDisplayService.Display();
         }
+
+        private void LevelDesignerClick(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

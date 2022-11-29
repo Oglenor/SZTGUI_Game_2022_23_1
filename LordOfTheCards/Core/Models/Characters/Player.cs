@@ -9,6 +9,7 @@ namespace Core.Models.Characters
 {
     public class Player : PlayerEntity
     {
+        public string PlayerName { get; set; }
         public override Card Deploy()
         {
             throw new NotImplementedException();

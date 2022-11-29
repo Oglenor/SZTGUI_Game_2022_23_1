@@ -264,6 +264,11 @@ namespace Logic
             GameModel.Battlefield.CurrentEnemyCard = GameModel.Battlefield.CurrentEnemy.Deck[rng.Next(0, 3)];
         }
 
+        public void SetCurrentCard(Card card)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
     }
 }
